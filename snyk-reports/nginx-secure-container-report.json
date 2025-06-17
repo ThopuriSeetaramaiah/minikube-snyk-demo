@@ -1,0 +1,35 @@
+{
+  "vulnerabilities": [
+    {
+      "id": "SNYK-ALPINE321-LIBXML2-10123178",
+      "title": "Unchecked Return Value",
+      "severity": "high",
+      "description": "A vulnerability in libxml2 could allow an attacker to exploit unchecked return values.",
+      "packageName": "libxml2/libxml2",
+      "version": "2.13.4-r5",
+      "fixedIn": ["2.13.4-r6"]
+    },
+    {
+      "id": "SNYK-ALPINE321-LIBXML2-10123179",
+      "title": "Out-of-bounds Read",
+      "severity": "high",
+      "description": "A vulnerability in libxml2 could allow an attacker to read memory outside of allocated buffers.",
+      "packageName": "libxml2/libxml2",
+      "version": "2.13.4-r5",
+      "fixedIn": ["2.13.4-r6"]
+    }
+  ],
+  "summary": {
+    "total": 2,
+    "critical": 0,
+    "high": 2,
+    "medium": 0,
+    "low": 0
+  },
+  "metadata": {
+    "projectName": "docker-image|nginx",
+    "projectType": "container",
+    "baseImage": "nginx:1.28.0-alpine",
+    "platform": "linux/amd64"
+  }
+}

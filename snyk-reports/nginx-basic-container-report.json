@@ -1,0 +1,79 @@
+{
+  "vulnerabilities": [
+    {
+      "id": "SNYK-DEBIAN9-ZLIB-2433935",
+      "title": "Out-of-bounds Write",
+      "severity": "high",
+      "description": "A vulnerability in zlib could allow an attacker to cause a buffer overflow by providing specially crafted input.",
+      "packageName": "zlib/zlib1g",
+      "version": "1:1.2.8.dfsg-5",
+      "fixedIn": ["1:1.2.8.dfsg-5+deb9u1"]
+    },
+    {
+      "id": "SNYK-DEBIAN9-OPENSSL-2807589",
+      "title": "OS Command Injection",
+      "severity": "critical",
+      "description": "A vulnerability in OpenSSL could allow an attacker to execute arbitrary commands on the system.",
+      "packageName": "openssl/libssl1.1",
+      "version": "1.1.0j-1~deb9u1",
+      "fixedIn": ["1.1.0l-1~deb9u6"]
+    },
+    {
+      "id": "SNYK-DEBIAN9-LIBWEBP-1289551",
+      "title": "Out-of-bounds Read",
+      "severity": "critical",
+      "description": "A vulnerability in libwebp could allow an attacker to read memory outside of allocated buffers.",
+      "packageName": "libwebp/libwebp6",
+      "version": "0.5.2-1",
+      "fixedIn": ["0.5.2-1+deb9u1"]
+    },
+    {
+      "id": "SNYK-DEBIAN9-LIBXML2-429367",
+      "title": "Out-of-bounds Read",
+      "severity": "critical",
+      "description": "A vulnerability in libxml2 could allow an attacker to read memory outside of allocated buffers.",
+      "packageName": "libxml2",
+      "version": "2.9.4+dfsg1-2.2+deb9u2",
+      "fixedIn": ["2.9.4+dfsg1-2.2+deb9u3"]
+    }
+  ],
+  "summary": {
+    "total": 252,
+    "critical": 28,
+    "high": 47,
+    "medium": 52,
+    "low": 125
+  },
+  "metadata": {
+    "projectName": "docker-image|nginx",
+    "projectType": "container",
+    "baseImage": "nginx:1.14.2",
+    "platform": "linux/amd64"
+  },
+  "remediation": {
+    "upgrades": [
+      {
+        "type": "minor",
+        "baseImage": "nginx:1.28.0",
+        "vulnerabilities": {
+          "total": 90,
+          "critical": 1,
+          "high": 3,
+          "medium": 0,
+          "low": 86
+        }
+      },
+      {
+        "type": "alternative",
+        "baseImage": "nginx:1.28.0-alpine3.21-slim",
+        "vulnerabilities": {
+          "total": 0,
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        }
+      }
+    ]
+  }
+}

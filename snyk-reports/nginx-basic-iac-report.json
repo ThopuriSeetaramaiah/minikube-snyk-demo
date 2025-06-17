@@ -1,0 +1,88 @@
+{
+  "vulnerabilities": [
+    {
+      "id": "SNYK-CC-K8S-11",
+      "title": "Container's or Pod's UID could clash with host's UID",
+      "severity": "low",
+      "description": "`runAsUser` value is set to low UID. UID of the container processes could clash with host's UIDs and lead to unintentional authorization bypass",
+      "path": "[DocId: 0] > input > spec > template > spec > containers[nginx] > securityContext > runAsUser",
+      "resolution": "Set `securityContext.runAsUser` value to greater or equal than 10'000. SecurityContext can be set on both `pod` and `container` level. If both are set, then the container level takes precedence"
+    },
+    {
+      "id": "SNYK-CC-K8S-4",
+      "title": "Container is running without memory limit",
+      "severity": "low",
+      "description": "Memory limit is not defined. Containers without memory limits are more likely to be terminated when the node runs out of memory",
+      "path": "[DocId: 0] > input > spec > template > spec > containers[nginx] > resources > limits > memory",
+      "resolution": "Set `resources.limits.memory` value"
+    },
+    {
+      "id": "SNYK-CC-K8S-41",
+      "title": "Container is running without liveness probe",
+      "severity": "low",
+      "description": "Liveness probe is not defined. Kubernetes will not be able to detect if application is able to service requests, and will not restart unhealthy pods",
+      "path": "[DocId: 0] > spec > template > spec > containers[nginx] > livenessProbe",
+      "resolution": "Add `livenessProbe` attribute"
+    },
+    {
+      "id": "SNYK-CC-K8S-42",
+      "title": "Container could be running with outdated image",
+      "severity": "low",
+      "description": "The image policy does not prevent image reuse. The container may run with outdated or unauthorized image",
+      "path": "[DocId: 0] > spec > template > spec > containers[nginx] > imagePullPolicy",
+      "resolution": "Set `imagePullPolicy` attribute to `Always`"
+    },
+    {
+      "id": "SNYK-CC-K8S-5",
+      "title": "Container has no CPU limit",
+      "severity": "low",
+      "description": "Container has no CPU limit. CPU limits can prevent containers from consuming valuable compute time for no benefit (e.g. inefficient code) that might lead to unnecessary costs. It is advisable to also configure CPU requests to ensure application stability.",
+      "path": "[DocId: 0] > input > spec > template > spec > containers[nginx] > resources > limits > cpu",
+      "resolution": "Add `resources.limits.cpu` field with required CPU limit value"
+    },
+    {
+      "id": "SNYK-CC-K8S-8",
+      "title": "Container is running with writable root filesystem",
+      "severity": "low",
+      "description": "`readOnlyRootFilesystem` attribute is not set to `true`. Compromised process could abuse writable root filesystem to elevate privileges",
+      "path": "[DocId: 0] > spec > template > spec > containers[nginx] > securityContext > readOnlyRootFilesystem",
+      "resolution": "Set `spec.{containers, initContainers}.securityContext.readOnlyRootFilesystem` to `true`"
+    },
+    {
+      "id": "SNYK-CC-K8S-10",
+      "title": "Container or Pod is running without root user control",
+      "severity": "medium",
+      "description": "Container or Pod is running without root user control. Container or Pod could be running with full administrative privileges",
+      "path": "[DocId: 0] > input > spec > template > spec > containers[nginx] > securityContext > runAsNonRoot",
+      "resolution": "Set `securityContext.runAsNonRoot` to `true`"
+    },
+    {
+      "id": "SNYK-CC-K8S-6",
+      "title": "Container does not drop all default capabilities",
+      "severity": "medium",
+      "description": "All default capabilities are not explicitly dropped. Containers are running with potentially unnecessary privileges",
+      "path": "[DocId: 0] > input > spec > template > spec > containers[nginx] > securityContext > capabilities > drop",
+      "resolution": "Add `ALL` to `securityContext.capabilities.drop` list, and add only required capabilities in `securityContext.capabilities.add`"
+    },
+    {
+      "id": "SNYK-CC-K8S-9",
+      "title": "Container is running without privilege escalation control",
+      "severity": "medium",
+      "description": "`allowPrivilegeEscalation` attribute is not set to `false`. Processes could elevate current privileges via known vectors, for example SUID binaries",
+      "path": "[DocId: 0] > spec > template > spec > containers[nginx] > securityContext > allowPrivilegeEscalation",
+      "resolution": "Set `spec.{containers, initContainers}.securityContext.allowPrivilegeEscalation` to `false`"
+    }
+  ],
+  "summary": {
+    "total": 9,
+    "critical": 0,
+    "high": 0,
+    "medium": 3,
+    "low": 6
+  },
+  "metadata": {
+    "projectName": "nginx-deployment",
+    "projectType": "k8s",
+    "policy": "kubernetes-security"
+  }
+}
