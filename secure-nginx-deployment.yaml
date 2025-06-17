@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: secure-nginx-deployment
+  labels:
+    app: secure-nginx
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: secure-nginx
+  template:
+    metadata:
+      labels:
+        app: secure-nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.28.0-alpine  # Using a more secure Alpine-based image
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: "0.5"
+            memory: "256Mi"
+          requests:
+            cpu: "0.2"
+            memory: "128Mi"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 30
+          periodSeconds: 30
+        imagePullPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: secure-nginx-service
+spec:
+  selector:
+    app: secure-nginx
+  ports:
+  - port: 80
+    targetPort: 80
+  type: NodePort
